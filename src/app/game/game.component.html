@@ -1,0 +1,9 @@
+<div class="container">
+    <div class="board">
+        <div *ngFor="let r of rowIndices" class="row">
+            <div *ngFor="let c of colIndices" (click)="move(r, c)" class="cell">
+                <h1>{{board[r][c] === 4 ? 'X' : board[r][c] === 1 ? 'O' : null}}</h1>
+            </div>
+        </div>
+    </div>
+</div>
