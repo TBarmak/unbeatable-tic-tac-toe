@@ -1,5 +1,5 @@
 <div class="container">
-    <canvas id="canvas" [ngClass]="{'canvasf': gameOver, 'canvasb': !gameOver}"></canvas>
+    <canvas id="canvas" [ngClass]="{'canvasf': gameOver || blocked, 'canvasb': !gameOver || blocked}"></canvas>
     <div class="board">
         <div *ngFor="let r of rowIndices" class="row">
             <div *ngFor="let c of colIndices" (click)="move(r, c)" class="cell">
