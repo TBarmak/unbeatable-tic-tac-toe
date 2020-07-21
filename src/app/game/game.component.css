@@ -1,5 +1,11 @@
 .container {
-    
+    position: absolute;
+    top: 2%;
+    left: 1%;
+    width: 30%;
+    height: 50%;
+    background-color: #383961;
+    border-radius: 12px;
 }
 
 .board {
@@ -7,28 +13,52 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    width: 30%;
-    background-color: aqua;
+    width: 100%;
+    height: 100%;
 }
 
 .row {
     width: 100%;
+    height: 32%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    
 }
 
 .cell {
-    width: 33%;
-    height: 5em;
+    width: 32%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 5px solid black;
+    background-color: aqua;
+    border-radius: 10px;
 }
 
 .cell:hover {
     background-color: aquamarine;
+}
+
+.canvasb {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.canvasf {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+.marking {
+    color: #383961;
+    font-size: 5em;
 }
