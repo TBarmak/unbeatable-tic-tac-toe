@@ -1,0 +1,13 @@
+<div class="container">
+    <div (click)="resetGame()" class="button">
+        <p>Reset Game</p>
+    </div>
+    <p style="color: #383961; padding: 0px; margin: 0px">Play Bot</p>
+    <div (click)="togglePlayBot()" [ngClass]="{'switchOff': !playBot, 'switchOn': playBot}">
+        <div class="switchKnob"></div>
+    </div>
+    <p *ngIf="playBot" style="color: #383961; padding: 0px; margin: 0px">Bot First</p>
+    <div *ngIf="playBot" (click)="toggleBotFirst()" [ngClass]="{'switchOff': !botFirst, 'switchOn': botFirst}">
+        <div class="switchKnob"></div>
+    </div>
+</div>

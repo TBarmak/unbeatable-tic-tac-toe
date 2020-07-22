@@ -1,0 +1,63 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 5px;
+    border: 2px solid black;
+    padding: 10px;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: aqua;
+    color: #383961;
+    padding: 5px;
+    margin: 5px;
+    border: 2px solid #383961;
+    border-radius: 5px;
+    height: 3em;
+    width: 8em;
+}
+
+.button:hover {
+    background-color: aquamarine;
+    color: white;
+    cursor: pointer;
+}
+
+.switchOff, .switchOn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 1.5em;
+    width: 8em;
+    border-radius: 1.5em;
+    border: 2px solid #383961;
+}
+
+.switchOn:hover {
+    background-color: aquamarine;
+}
+
+.switchOff:hover {
+    background-color: darkgray;
+}
+
+.switchOn {
+    justify-content: flex-end;
+    background-color: aqua;
+}
+
+.switchOff {
+    justify-content: flex-start;
+    background-color: white;
+}
+
+.switchKnob {
+    height: 2em;
+    width: 2em;
+    border-radius: 1em;
+    background-color: #383961;
+}

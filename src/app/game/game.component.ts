@@ -15,6 +15,8 @@ export class GameComponent implements OnInit {
   canvasWidth = 0
   canvasHeight = 0
   blocked = false
+  playBot = true
+  botFirst = false
 
   constructor() { }
 
@@ -133,6 +135,7 @@ export class GameComponent implements OnInit {
   column - a number representing the index of the column where the marking was made
   */
   checkGameOver(row, column) {
+    console.log("Checking if game over for row: " + row + " column: " + column)
     // Check for row win
     let rowSum = this.board[row].reduce((a, b) => a + b, 0)
     if (rowSum === 3 || rowSum === 12) {
@@ -175,15 +178,24 @@ export class GameComponent implements OnInit {
         this.board[row][column] = 4;
         this.turn = !this.turn;
         this.moves += 1
-        this.blocked = true
-        setTimeout(() => {
-          this.makeBotMove(1)
-          this.blocked = false
-        }, 1000)
+        if (this.playBot && !this.botFirst) {
+          this.blocked = true
+          setTimeout(() => {
+            this.makeBotMove(1)
+            this.blocked = false
+          }, 1000)
+        }
       } else {
         this.board[row][column] = 1;
         this.turn = !this.turn;
         this.moves += 1
+        if (this.playBot && this.botFirst) {
+          this.blocked = true
+          setTimeout(() => {
+            this.makeBotMove(4)
+            this.blocked = false
+          }, 1000)
+        }
       }
       let win = this.checkGameOver(row, column)
       if (win !== null) {
@@ -208,25 +220,74 @@ export class GameComponent implements OnInit {
         3 - 5, inclusive = columns, 6 & 7 = diagonals)
   */
   drawLine(direction) {
+    console.log("Drawing line in direction: " + direction)
     let canvas = <HTMLCanvasElement>document.getElementById("canvas")
     let ctx = canvas.getContext('2d');
 
     if (direction < 3) {
+      ctx.beginPath()
       ctx.moveTo(0, (this.canvasHeight * (2 * direction + 1)) / 6)
       ctx.lineTo(this.canvasWidth, (this.canvasHeight * (2 * direction + 1)) / 6)
     } else if (direction < 6) {
+      ctx.beginPath()
       ctx.moveTo((this.canvasWidth * (2 * (direction - 3) + 1)) / 6, 0)
       ctx.lineTo((this.canvasWidth * (2 * (direction - 3) + 1)) / 6, this.canvasHeight)
     } else if (direction === 6) {
+      ctx.beginPath()
       ctx.moveTo(0, 0)
       ctx.lineTo(this.canvasWidth, this.canvasHeight)
     } else if (direction === 7) {
+      ctx.beginPath()
       ctx.moveTo(this.canvasWidth, 0)
       ctx.lineTo(0, this.canvasHeight)
     }
     ctx.strokeStyle = "#248232"
     ctx.lineWidth = 1
     ctx.stroke()
+  }
+
+  /*
+  resetGame() will reset the game
+  */
+  resetGame() {
+    this.blocked = true
+
+    let canvas = <HTMLCanvasElement>document.getElementById("canvas")
+    let ctx = canvas.getContext('2d');
+
+    setTimeout(() => {
+      this.turn = true
+      this.gameOver = false
+      this.moves = 0
+      this.board = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+      this.blocked = false
+      ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight)
+      setTimeout(() => {
+        if (this.playBot && this.botFirst) {
+          this.blocked = true
+          this.makeBotMove(4)
+          this.blocked = false
+        }
+      }, 50)
+    }, 1000);
+  }
+
+  /*
+  updateBotFirst(botFirst) will toggle this.botFirst based on the boolean argument
+  botFirst - boolean that is true if the bot should make the first move, false otherwise
+  */
+  updateBotFirst(botFirst) {
+    this.botFirst = botFirst
+    this.resetGame()
+  }
+
+  /*
+  updatePlayBot(playBot) will toggle this.playBot based on the boolean argument
+  playBot - boolean that is true if the game is against a bot, false otherwise
+  */
+  updatePlayBot(playBot) {
+    this.playBot = playBot
+    this.resetGame()
   }
 
   ngOnInit(): void {

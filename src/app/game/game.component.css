@@ -38,6 +38,7 @@
 
 .cell:hover {
     background-color: aquamarine;
+    cursor: pointer;
 }
 
 .canvasb {
@@ -61,4 +62,10 @@
 .marking {
     color: #383961;
     font-size: 5em;
+}
+
+.settings {
+    top: 2%;
+    position: absolute;
+    left: 33%;
 }

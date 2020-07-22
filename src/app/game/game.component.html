@@ -8,3 +8,5 @@
         </div>
     </div>
 </div>
+<app-settings (resetEmitter)="resetGame()" (gameTypeEmitter)="updatePlayBot($event)"
+    (orderEmitter)="updateBotFirst($event)" class="settings"></app-settings>
